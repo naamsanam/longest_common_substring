@@ -1,0 +1,22 @@
+def longest_common_substring(s1, s2):
+    m= len(s1)
+    n= len(s2)
+    result = 0
+    end = 0 
+    length = [[0 for x in range(n+1)] for y in range(m+1)]
+    for i in range(m+1):
+        for j in range(m+1):
+            if i == 0 or j == 0:
+                length[i][j] = 0
+            elif s1[i-1] == s2[j-1]:
+                length[i][j] = length[i-1][j-1] + 1
+                if length[i][j] > result:
+                    result = length[i][j]
+                    end = i-1
+            else:
+                length[i][j] = 0
+        return s1[end-result+1:end+1]
+
+string1 = "abcdxyz"
+string2 = "xyzabcd"
+print(longest_common_substring(string1,string2))
